@@ -190,11 +190,12 @@ int ksu_handle_execveat_ksud(int *fd, struct filename **filename_ptr,
 		// is just arranged correct accidentally, but is not correct in x86_64
 		// i have no device to test, so revert it for x86_64
 		static int init_count = 0;
-		if (++init_count == 2) {
+		if (++init_count >= 2 && init_count<= 3) {
 			// 1: /system/bin/init selinux_setup
 			// 2: /system/bin/init second_stage
-			pr_info("/system/bin/init second_stage executed\n");
+			pr_info("/system/bin/init second_stage executed: init_count=%d\n", init_count);
 			apply_kernelsu_rules();
+			init_second_stage_executed = true;
 			ksu_android_ns_fs_check();
 		}
 #endif
