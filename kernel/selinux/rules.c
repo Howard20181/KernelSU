@@ -68,7 +68,9 @@ void apply_kernelsu_rules()
 	// we need to save allowlist in /data/adb/ksu
 	ksu_allow(db, "kernel", "adb_data_file", "dir", ALL);
 	ksu_allow(db, "kernel", "adb_data_file", "file", ALL);
-	ksu_allow(db, "kernel", "system_file", "dir", ALL);
+	ksu_allow(db, "kernel", "system_file", "dir", "write");
+	ksu_allow(db, "kernel", "system_file", "dir", "add_name");
+	ksu_allow(db, "kernel", "system_file", "file", "create");
 	// we may need to do mount on shell
 	ksu_allow(db, "kernel", "shell_data_file", "file", ALL);
 	// we need to read /data/system/packages.list
